@@ -1,0 +1,37 @@
+$ git
+$ git help -a
+'git help -a' and 'git help -g' list available subcommands and some
+concept guides. See 'git help <command>' or 'git help <concept>'
+to read about a specific subcommand or concept.
+
+$ git config --global user.name "Votre nom ou pseudo"
+$ git config --global user.email "votre@email.com"
+$ git config --system
+$ git config --help
+$ git config --global core.editor notepad++
+
+$ git init -- crée un nouveau dépôt Git
+$ git status -- inspecte l'état du contenu du répertoire de travail et de la zone de transfert
+$ git add -- ajoute les fichiers du répertoire de travail à la zone de transfert
+$ git diff -- montre la différence entre le répertoire de travail et la zone de transfert
+$ git commit -- stocke en permanence les modifications de fichiers de la zone de transfert dans le référentiel
+$ git log -- affiche une liste de tous les précédents commits
+
+$ git checkout HEAD nom_de_fichier -- annule les modifications dans le répertoire de travail.
+$ git reset HEAD nom_de_fichier -- désactive les modifications de fichier dans la zone de transfert.
+$ git reset commit_SHA -- réinitialise le commit à une version précédente de votre historique.
+De plus, vous avez appris comment ajouter plusieurs fichiers à la zone de transfert avec une seule commande :
+$ git add nom_de_fichier_1 nom_de_fichier_2 -- ajouter les fichiers "nom_de_fichier_1" et "nom_de_fichier_2" au répertoire de travail.
+$ git add * -- ajouter tous les fichiers au répertoire de travail.
+
+$ git branch -- Répertorie toutes les branches d'un projet Git.
+$ git branch nouvelle_branche -- Crée une nouvelle branche.
+$ git checkout nouvelle_branche -- Utilisé pour passer d'une branche à l'autre.
+$ git merge nom_de_branche -- Utilisé pour joindre les changements de fichier d'une branche à l'autre.
+$ git branch -d nom_de_branche -- supprime la branche spécifiée.
+
+$ git clone -- Crée une copie locale d'une remote.
+$ git remote -v -- Répertorie les remotes d'un projet Git.
+$ git fetch -- Cherche le travail effectué dans la remote et l'extrait dans la copie locale.
+$ git merge origin/master -- fusionne la branche origine/master dans votre branche locale.
+$ git push origin <nom_de_branche> -- Pousse une branche locale dans la remote d'origine.

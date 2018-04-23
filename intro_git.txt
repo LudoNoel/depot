@@ -1,0 +1,525 @@
+--------################################### Fonctionnement de Git ##########################################--------
+
+Git est un logiciel créé par Linus Torvald, auteur du Kernel Linux.
+Date de sortie initiale : 7 avril 2005
+Dernière version : 2.17.0 (2 avril 2018)
+Git est un protocole de gestion de versions sous licence libre.
+
+Lorsque vous écrivez un peu de code et souhaitez collaborer avec d'autres développeurs.
+Quand vous voulez toujours savoir pourquoi une modification a été faite et ne plus risquer de perdre des jours de travail.
+Vous avez clairement besoin de versionner votre code !
+
+Un logiciel de gestion de versions est un outil incontournable pour tout développeur.
+
+Pourquoi versionner votre code ? 
+
+Lorsque vous travaillez sur un projet de code, vous allez régulièrement y apporter des modifications, et par moments ces modifications vont provoquer des bugs. Lorsque vous revenez sur votre projet après quelques jours ou même quelques heures, il peut être difficile de vous souvenir des dernières modifications que vous avez effectuées et de retrouver vos repères dans votre code.
+
+Avec un logiciel de versioning comme Git, vous pouvez garder la trace de toutes les modifications faites sur votre code pour pouvoir vous y retrouver à tout moment. À chaque fois que vous faites une série de modifications (créer un fichier, supprimer un fichier, modifier un texte dans un fichier, etc.),  vous allez pouvoir enregistrer ces modifs dans un commit.
+
+Par exemple, si vous travaillez sur un formulaire de newsletter en ligne :
+    Vous allez d'abord faire une 1ère série de modifications pour créer la base HTML/CSS de votre formulaire. 
+    => Une fois ces modifications faites, vous pourrez faire un premier commit dans Git et le nommer "1ère passe sur le formulaire de newsletter".
+
+    Ensuite, vous rendrez peut-être votre formulaire dynamique avec du PHP. 
+    => 2ème commit : "PHP ajouté".
+
+    Enfin, un collègue vous demandera de changer le wording sur le champs du formulaire. 
+    => 3ème commit : "Texte reformulé".
+
+Git est un logiciel qui vous permet de suivre les modifications apportées à un projet au fil du temps. Git fonctionne en enregistrant les modifications que vous apportez à un projet, en stockant ces modifications, puis en vous permettant de les référencer si nécessaire.
+
+UN COMMIT CORRESPOND DONC À UNE VERSION DE VOTRE CODE À UN INSTANT T.
+
+La somme de tous les commits constitue l'historique de votre projet. Et l'intérêt d'un logiciel de versioning comme Git, c'est que vous pouvez vous placer à n'importe quel endroit de cet historique. En cas de bug par exemple, ou lorsque vous êtes plusieurs à travailler sur un même projet, revenir en arrière sur une précédente version du code peut s'avérer bien utile... tellement utile qu'utiliser un logiciel de versioning est considéré comme une habitude indispensable pour tout développeur digne de ce nom ! 
+
+Comme dit Jeff Atwood, un développeur très actif qui a notamment créé Stack Overflow, un forum d'entraide pour les développeurs que vous serez souvent amenés à utiliser lorsque vous vous poserez des questions dans vos projets de code :
+    "Si le code n'est pas enregistré dans un logiciel de gestion de version, il n'existe pas."
+
+Alors c'est parti pour donner vie à votre code avec Git et GitHub !
+
+Il existe de nombreux logiciels de gestion de version, qui peuvent être basés sur différents modèles :
+
+    - Modèle centralisé : un serveur central contrôle toute la base de code du logiciel. 
+    Exemples de logiciels de versioning utilisant un modèle centralisé : SVN, CVS.
+
+    - Modèle distribué : toutes les machines ont accès à la base de code, pas besoin de passer par un serveur central. 
+    Exemples de logiciels de versioning utilisant un modèle distribué : Git, Mercurial, Bazaar.
+
+Le modèle distribué présente plusieurs avantages : 
+    Moins de risques de perdre son code puisqu'il est accessible par plusieurs sources.
+
+    On peut travailler plus rapidement et sans être connecté à Internet puisqu'il n'y a pas besoin de se connecter à un serveur central.
+
+En plus des avantages du modèle distribué, Git a un autre atout : une grande communauté ! Cela facilite la collaboration et les échanges fructueux entre développeurs.
+
+Maintenant que vous avez compris le principe du versioning, il est temps de vous équiper pour découvrir en pratique les avantages de Git.
+
+Tout d'abord, pour utiliser Git, vous allez avoir besoin d'utiliser la console. Si vous n'êtes pas très (ou pas du tout !) à l'aise avec, consultez le Rappel sur la console ci-dessous. Sinon, vous pouvez passer directement à la section suivante "Installer Git" où vous trouverez les étapes pour installer Git sur votre machine. 
+Rappel sur la console
+
+Dans ce cours, nous allons utiliser la console, également appelée "terminal".  Pour suivre le cours, vous n’aurez pas besoin d’être expert avec la console, mais il est quand même nécessaire d’avoir un minimum de bases.
+
+La console permet de naviguer dans son arborescence de fichiers (pour ouvrir un fichier, changer de répertoire, etc.) de la même façon qu’une interface graphique.
+
+Nous allons écrire de courtes lignes de texte appelées “commandes”. Toutes ces commandes seront exécutées dans le “répertoire courant”. Voyons ensemble les commandes utiles à connaître pour ce cours. 
+
+--------################################## Installation de Git sous Windows ################################--------
+
+Rendez vous sur http://msysgit.github.io et téléchargez la dernière version disponible. Une fois le fichier récupéré, lancez-le et suivez les instructions. Vous pouvez laisser toutes les configurations par défaut. Cela va vous donner accès à Git ainsi qu’à une console émulant le comportement de Bash, la console sous Linux. Du coup, vous aurez accès aux mêmes commandes que tout le monde (ls, cd, mkdir…).
+
+Maintenant vous allez pouvoir ouvrir l’application “git bash” qui se situe maintenant dans votre menu Démarrer.
+
+Exécutez la commande suivante pour définir votre nom et l’email que vous utiliserez ensuite pour créer un compte gratuit sur Github :
+$ git config --global user.name "Votre nom ou pseudo"
+$ git config --global user.email "votre@email.com"
+
+Pour vérifier que tout va bien, relancez votre console et tapez simplement 'git'. Si l’installation a fonctionné, vous devriez voir du texte en anglais expliquant l’utilisation de Git.
+
+Petite astuce : utilisez les touches "Shift+Insert" de votre clavier pour coller du texte dans git bash (ctrl+v ne fonctionnera pas sur Windows).
+
+--------################################### Éditeurs de texte/code #########################################--------
+
+5 meilleurs éditeurs de code :
+- Atom (développer par Github)
+- UltraEdit (développé par IDM Computer Solutions)
+- Sublime Text
+- Notepad++
+- Coda (Mac/Possibilité de coder même sur votre tablette moyennant 99$)
+
+
+--------################################## Fonctionnement de la console ####################################--------
+Console, prompt, 
+Windows : invite de commandes
+Linux : (shell, bash)
+
+Les commandes de base de la console :
+La commande pwd vous permet de connaître votre répertoire courant (tapez pwd puis Entrée) :
+$ pwd
+
+La commande ls vous permet de voir la liste des fichiers et répertoires dans le dossier courant :
+$ ls
+$ ls -a -- Liste tous les fichiers + fichiers cachés + répertoires (dossiers)
+$ ls -l -- Liste tous les fichiers + répertoires (dossiers) sous forme d'arborescence
+$ ls -t -- Liste tous les fichiers + répertoires (dossiers) Trier par heure de modification, le plus récent en premier.
+$ ls -alt -- Liste tous les fichiers + fichiers cachés + répertoires (dossiers) triés par heure de modification, le plus récent en premier.
+
+La commande cd vous permet de vous placer dans un répertoire :
+$ cd mon_répertoire/
+
+La commande touch vous permet de créer un fichier :
+$ touch mon_fichier_à_créer.txt
+
+La commande mkdir vous permet de créer un dossier :
+$ mkdir repertoire_à_créer
+
+La commande cat vous permet d'afficher le contenu d’un fichier :
+cat mon_fichier.txt
+
+--------######################################### Entraînement #############################################--------
+--------------------------------------------------------------------------------------------------------------------
+Nous allons apprendre à utiliser Git pour nous aider à écrire un scénario appelé :
+"Harry potter à l'école des sorciers programmeurs."
+--------------------------------------------------------------------------------------------------------------------
+-- Créer un fichier nommé : "scene-1.html"
+-- Ajouter ce code : <p>Harry potter à l'école des sorciers programmeurs<p><br>
+
+
+/\/\/\/\GIT INIT/\/\/\/\
+Maintenant que nous avons commencé à travailler sur le scénario, transformons le répertoire "le_code_des_sorciers"  en un projet Git. Nous faisons cela avec :
+$ git init
+Le mot init signifie initialiser. La commande configure tous les outils dont Git a besoin pour commencer à suivre les modifications apportées au projet.
+
+Dans le terminal, initialisez un nouveau projet Git.
+$ git init
+-- Notez la sortie :
+-- Initialized empty Git repository in C:/Users/Ludo/.git/
+
+Le projet Git a été créé.
+
+Nous avons un projet Git. Un projet Git peut être considéré comme ayant trois parties:
+1. Un répertoire de travail : où vous allez faire tout le travail: créer, éditer, supprimer et organiser des fichiers
+2. Une zone de transfert : où vous répertoriez les modifications que vous apportez au répertoire de travail
+3. Un dépôt : où Git stocke de façon permanente ces modifications sous différentes versions du projet
+
+Le workflow de Git consiste à éditer des fichiers dans le répertoire de travail, à ajouter des fichiers à la zone de transfert et à enregistrer les modifications dans un dépôt Git. Dans Git, nous enregistrons les modifications avec un commit, dont nous allons en apprendre davantage dans cette leçon.
+
+Jetez un coup d'oeil au diagramme [ * Voir le schéma : git workflow2.jpg * ]. Avant de continuer, il sera utile de se familiariser avec les trois parties du flux de travail Git.
+
+/\/\/\/\GIT STATUS/\/\/\/\
+Au fur et à mesure que vous écrivez le scénario, vous allez modifier le contenu du répertoire de travail. Vous pouvez vérifier l'état de ces modifications avec la commande :
+$ git status
+
+Dans le terminal, vérifiez l'état du projet de code des sorciers.
+
+Dans la sortie, notez le fichier en rouge sous les fichiers non suivis. 
+Untracked signifie que Git voit le fichier mais n'a pas encore commencé à suivre les modifications.
+
+/\/\/\/\GIT ADD/\/\/\/\
+Pour que Git commence à suivre le fichier "scene-1.html", il doit être ajouté à la zone de transfert.
+Nous pouvons ajouter un fichier à la zone de transfert avec :
+$ git add nom_du_fichier.html
+Le mot "nom_du_fichier.html" fait ici référence au nom du fichier que vous êtes en train d'éditer, tel que "scene-1.html"
+
+Ajoutez "scene-1.html" à la zone de transfert dans Git. Rappelez-vous que vous devrez identifier le fichier par son nom :
+$ git add scene-1.html
+$ git status -- Pour vérifiez l'état modifié du projet de code des sorciers.
+
+/\/\/\/\GIT DIFF/\/\/\/\
+Bon travail ! Vous savez maintenant comment ajouter un fichier à la zone de transfert.
+
+Imaginons que nous tapons une autre ligne dans le fichier "scene-1.html". Depuis que le fichier est suivi, nous pouvons vérifier les différences entre le répertoire de travail et la zone de transfert avec:
+$ git diff nom_du_fichier.html
+
+Ici "nom_du_fichier.html" est le nom réel du fichier. Si le nom de mon fichier était index.txt, la commande serait
+$ git diff index.txt
+
+Dans l'éditeur de code, ajoutez ce texte au fichier "scene-1.html" :
+<p><strong>Dumbledore :</strong><br>J'aurais dû me douter que vous seriez là... Professeur McGonagall.</p>
+
+Dans le terminal, utilisez la nouvelle commande git diff pour vérifier la différence entre le répertoire de travail et la zone de transfert.
+
+Ajoutez les modifications à la zone de transfert de Git. Rappelez-vous que vous devrez identifier le fichier par son nom.
+$ git add scene-1.html
+
+/\/\/\/\GIT COMMIT/\/\/\/\
+Un commit est la dernière étape de notre workflow de Git. Un commit stocke définitivement les modifications de la zone de transfert dans le dépôt.
+
+git commit est la commande que nous allons faire ensuite.
+Cependant, un code de plus est nécessaire pour un commit : l'option -m suivie d'un message.
+Voici un exemple:
+$ git commit -m "Terminer la première ligne de dialogue"
+
+Conventions standard pour les messages des commits :
+-Doit être entre guillemets
+-Écrit au présent
+-Devrait être bref (50 caractères ou moins) lors de l'utilisation de l'option -m
+
+Faites votre premier commit !
+Dans le terminal, tapez la commande avec le message du commit. Le message doit décrire l'objet du commit.
+
+Si vous avez du mal à penser à un bon message, réfléchissez à la façon dont le projet a changé depuis son début.
+
+/\/\/\/\GIT LOG/\/\/\/\
+Souvent avec Git, vous devrez vous référer à une version antérieure d'un projet. Les validations sont stockées chronologiquement dans le dépôt et peuvent être visualisées avec :
+$ git log
+
+Dans le terminal consultez la liste des logs de vos commits.
+Dans la sortie, vous notez :
+1. Un code de 40 caractères, appelé SHA, qui identifie de manière unique le commit. Cela apparaît dans le texte orange.
+2. L'auteur du commit (vous !)
+3. La date et l'heure du commit
+4. Le message du commit
+
+--------####################################### Généralisations ############################################--------
+Vous venez de découvrir le workflow fondamental de Git. Vous avez beaucoup appris ! Prenons un moment pour généraliser:
+
+Git est le système de contrôle de version standard pour les développeurs Web
+Utilisez les commandes Git pour suivre les modifications apportées à un projet :
+$ git init -- crée un nouveau dépôt Git
+$ git status -- inspecte l'état du contenu du répertoire de travail et de la zone de transfert
+$ git add -- ajoute les fichiers du répertoire de travail à la zone de transfert
+$ git diff -- montre la différence entre le répertoire de travail et la zone de transfert
+$ git commit -- stocke en permanence les modifications de fichiers de la zone de transfert dans le référentiel
+$ git log -- affiche une liste de tous les précédents commits
+--------####################################################################################################--------
+
+
+--------###################################### Retour en arrière ###########################################--------
+Lorsque nous travaillons sur un projet Git, nous apportons parfois des modifications dont nous voulons nous débarrasser. Git offre quelques fonctionnalités qui nous permettent d'annuler les erreurs lors de la création du projet. Dans cette leçon, nous allons apprendre certaines de ces fonctionnalités.
+
+Pour commencer, passons en revue le workflow Git de base.
+
+--------######################################### Entraînement #############################################--------
+Vous êtes dans un projet Git intitulé Hamlet. Dans l'éditeur de code, vous allez travailler sur "scene-5.html". Ici, Hamlet rencontre le fantôme de son père.
+Ajoutez ce texte au fichier : 
+<p><strong>LE SPECTRE.</strong><br>- L'heure est presque arrivée<br>
+Où je dois, dans les flammes sulfureuses de mon tourment<br>
+M'en retourner.</p>
+
+Dans le terminal, ajoutez le fichier "scene-5.html" à la zone de transfert :
+$ git add scene-5.html
+
+Validez les modifications du commit avec un bon message :
+$ git commit -m "Ajout de dialogue"
+
+/\/\/\/\COMMIT HEAD/\/\/\/\
+Dans Git, le commit sur lequel vous êtes actuellement est connu sous le nom de commit HEAD. Dans de nombreux cas, le commit le plus récente est la commit HEAD.
+Pour voir le commit HEAD, entrez :
+$ git show HEAD
+La sortie de cette commande affichera tout ce que la commande git log affiche pour le commit HEAD, plus toutes les modifications de fichier qui ont été commitées.
+
+/\/\/\/\GIT CHECKOUT/\/\/\/\
+Que se passe-t-il si vous décidez de changer la ligne du fantôme dans le répertoire de travail, mais que vous décidez ensuite de supprimer ce changement ?
+
+Vous pourriez ré-écrire la ligne comme elle était à l'origine, mais que faire si vous avez oublié le libellé exact ?
+$ git checkout HEAD scene-5.html
+La commande restaurera le fichier dans votre répertoire de travail pour qu'il ressemble exactement à ce qu'il était lors du dernier commit.
+
+Changez les mots du fantôme d'une manière ou d'une autre.
+Voici une suggestion :
+<p><strong>LE SPECTRE.</strong><br>- L'heure est presque arrivée<br>
+Où je dois, dans les ballons sulfureux de mon tourment<br>
+M'en retourner.</p>
+
+Dans le terminal, utilisez git diff pour voir la différence entre "scene-5.html" tel qu'il apparaît dans le répertoire de travail et la façon dont il apparaît dans votre dernier commit.
+$ git diff
+
+Utilisez la nouvelle commande Git pour restaurer le fichier dans votre répertoire de travail pour qu'il ressemble à ce qu'il était lors du dernier commit.
+$ git checkout HEAD scene-5.html
+Notez que les modifications que vous avez apportées à la ligne du fantôme ont été supprimées.
+
+Le dépot "hamlet" sur lequel nous travaillons contient plusieurs fichiers. Dans Git, il est courant de modifier de nombreux fichiers, d'ajouter ces fichiers à la zone de transfert et de les valider dans un dépôt via un seul commit.
+
+Par exemple, dites que vous voulez changer le personnage "LARRY" en "LAERTES" dans le script. Le nom apparaît actuellement dans deux fichiers. Après avoir modifié le nom dans les deux fichiers, vous pouvez ajouter les fichiers modifiés à la zone de transfert avec :
+$ git add nom_de_fichier_1 nom_de_fichier_2
+
+Éditer les fichiers "scene-3.html" et "scene-7.html"
+Dans la scène 3.html, partout où vous voyez le nom "LARRY" changez pour "LAERTES".
+Maintenant, changez toutes les instances de "LARRY" en "LAERTES" dans la scène 7.html
+
+Ajoutez les fichiers à la zone de transfert ensemble en utilisant une seule commande git.
+$ git add scene-3.html scene-7.html
+
+/\/\/\/\GIT RESET I/\/\/\/\
+/\/\/\/\GIT RESET AVANT COMMIT/\/\/\/\
+Génial ! Les fichiers que vous avez ajoutés à la zone de transfert appartiennent au même commit.
+
+Et si, avant de faire votre commit, vous supprimez accidentellement une ligne importante de scene-2.txt ?
+Sans y réfléchir, vous ajoutez la scène 2.txt à la zone de transfert. Le changement de fichier n'est pas lié à l'échange de Larry / Laertes et vous ne voulez pas l'inclure dans le commit.
+Nous pouvons désynchroniser ce fichier de la zone de transit en utilisant :
+$ git reset HEAD nom_de_fichier
+Cette commande réinitialise le fichier dans la zone de transfert pour être identique au commit HEAD. Il ne supprime pas les modifications de fichiers du répertoire de travail, il les supprime simplement de la zone de transfert.
+
+Pour essayer la nouvelle commande, faisons une erreur exprès !
+L'éditeur de code est ouvert sur "scene-2.html".
+1. Supprimez n'importe quelle ligne du fichier et sauvegarder le.
+2. Dans le terminal, ajoutez "scene-2.html" à la zone de transfert Git.
+$ git add scene-2.html
+3. Maintenant, vérifiez l'état du projet Git. Dans la sortie, notez "scene-2.html" sous "Changes to be committed".
+$ git status
+4. Utilisez la nouvelle commande Git pour enlever le fichier "scene-2.html" de la zone de transfert. Remarquez dans la sortie : 
+$ git reset HEAD scene-2.html
+----------------------------------
+--"Unstaged changes after reset"--
+--M scene-2.html			    --
+----------------------------------
+    M est l'abréviation de "modification" 
+Maintenant que les modifications apportées au fichier "scene-2.html" ont été exclues de la zone de transfert, vous êtes prêt à commiter.
+A partir du terminal, faites un commit pour enregistrer l'échange de nom Larry / Laertes dans Hamlet.
+
+/\/\/\/\GIT RESET II/\/\/\/\
+/\/\/\/\GIT RESET SUR UN COMMIT/\/\/\/\
+Créer un projet, c'est comme faire de la randonnée dans une forêt. Parfois, vous prenez un mauvais virage et vous vous retrouvez perdu.
+Tout comme vous revenez sur vos pas lors de cette randonnée, Git vous permet de retourner à la partie avant de faire le mauvais virage. Vous pouvez le faire avec :
+$ git reset commit_SHA
+Cette commande fonctionne en utilisant les 7 premiers caractères du SHA d'un commit précédent. Par exemple, si le SHA du commit précédent est 5d692065cf51a2f50ea8e7b19b5a7ae512f633ba, utilisez:
+$ git reset 5d69206
+HEAD est maintenant défini sur ce commit précédent.
+Dans le terminal, affichez le log de commit Git :
+$ git log
+Remarque: Si votre curseur reste bloqué en mode "git log" dans le terminal, appuyez sur "q" sur votre clavier pour quitter.
+Dans le terminal, entrez la commande pour réinitialiser à un commit précédent, en utilisant les 7 premiers caractères de l'un des SHA du commit passé dans votre log Git.
+Ensuite, affichez à nouveau le log de commit Git.
+Vous remarquez quelque chose d'intéressant ? Les commits qui sont venus après celui que vous avez réinitialisé sont partis. Le commit HEAD a été réaffectée. Vous venez de changer l'histoire.
+
+/\/\/\/\GIT RESET RECAP/\/\/\/\
+Pour mieux comprendre la commande "git reset commit_SHA", notez le diagramme [ * Voir le schéma : git reset review.jpg * ]. Chaque cercle représente un commit.
+Avant la réinitialisation :
+    HEAD pointe sur le commit le plus récent.
+Après la réinitialisation :
+    HEAD pointe sur un commit précédent de votre choix.
+    Les commits gris ne font plus partie de votre projet.
+    Vous avez, en un sens, rembobiné l'histoire du projet.
+	
+--------######################################## Généralisations ###########################################--------
+Félicitations! Vous avez appris trois façons différentes de revenir en arrière dans Git. Vous pouvez utiliser ces compétences pour annuler les modifications apportées à votre projet Git.
+
+Prenons un moment pour passer en revue les nouvelles commandes :
+$ git checkout HEAD nom_de_fichier -- annule les modifications dans le répertoire de travail.
+$ git reset HEAD nom_de_fichier -- désactive les modifications de fichier dans la zone de transfert.
+$ git reset commit_SHA -- réinitialise le commit à une version précédente de votre historique.
+De plus, vous avez appris comment ajouter plusieurs fichiers à la zone de transfert avec une seule commande :
+$ git add nom_de_fichier_1 nom_de_fichier_2 -- ajouter les fichiers "nom_de_fichier_1" et "nom_de_fichier_2" au répertoire de travail.
+$ git add * -- ajouter tous les fichiers au répertoire de travail.
+--------####################################################################################################--------
+
+/\/\/\/\GIT BRANCH I/\/\/\/\
+Jusqu'à présent, vous avez travaillé dans une seule branche Git appelée "master". Git nous permet de créer des branches pour expérimenter des versions d'un projet. Imaginez que vous voulez créer une version d'une histoire avec une fin heureuse. Vous pouvez créer une nouvelle branche et apporter les modifications de fin heureuse à cette branche uniquement. Cela n'aura aucun effet sur la branche master jusqu'à ce que vous soyez prêt à fusionner la fin heureuse avec la branche master.
+
+Dans cette leçon, nous utiliserons les branches de Git pour développer plusieurs versions d'un Curriculum Vitae.
+Vous pouvez utiliser la commande ci-dessous pour répondre à la question: "sur quelle branche je travaille ?"
+$ git branch
+Vérifiez dans quelle branche vous êtes actuellement.
+Dans la sortie, le * (astérisque) vous montre dans quelle branche vous vous trouvez. Le projet n'a qu'une seule branche en ce moment.
+
+Le diagramme [ * Voir le schéma : git branching overview.jpg * ] illustre la ramification.
+    Les cercles sont des validations, et forment ensemble l'historique de commit du projet Git.
+    "New Branch" est une version différente du projet Git. Il contient des commits de "master" mais aussi a des commits que "master" n'a pas.
+	
+/\/\/\/\GIT BRANCH II/\/\/\/\
+À l'heure actuelle, le projet Git n'a qu'une seule branche: le master.
+Pour créer une nouvelle branche, utilisez:
+$ git branch nouvelle_branche
+Ici "nouvelle_branche" serait le nom de la nouvelle branche que vous créez, comme des photos ou un texte descriptif. Assurez-vous de nommer votre branche comme quelque chose qui décrit le but de la branche. En outre, les noms de branches ne peuvent pas contenir d'espaces : "nouvelle-branche" et "nouvelle_branche" sont des noms de branches valides, mais "nouvelle branche" ne l'est pas.
+
+Créons une nouvelle version d'un CV (cv.txt) pour postuler à un rôle d'instructeur d'escrime.
+Créez une nouvelle branche appelée "escrime".
+N'oubliez pas d'écrire le mot "escrime" correctement.
+Ensuite, regardez vos branches comme vous l'avez fait dans l'exercice précédent.
+$ git branch
+Notez dans la sortie il y a maintenant deux branches : 
+------------
+  escrime --
+* master  --
+------------
+
+/\/\/\/\GIT CHECKOUT/\/\/\/\
+Génial! Vous venez de créer une nouvelle branche.
+Les branches "master" et "escrime" sont identiques : elles partagent exactement le même historique de commit. Vous pouvez passer à la nouvelle branche avec :
+$ git checkout nouvelle_branche
+Une fois que vous changez de branche, vous pouvez maintenant effectuer des commits sur la branche qui n'ont aucun impact sur le master.
+Vous pouvez continuer votre flux de travail, tandis que le master reste intact !
+
+1. Passez de la branche principale à la branche escrime.
+$ git checkout escrime
+2. Utilisez git branch pour vérifier que vous avez changé de branche.
+Dans la sortie, notez que le * est maintenant sur la branche escrime :
+------------
+* escrime --
+  master  --
+------------
+
+/\/\/\/\COMMIT SUR UNE NOUVELLE BRANCHE/\/\/\/\
+Félicitations! Vous avez changé pour une nouvelle branche. Toutes les commandes que vous faites sur le master, vous pouvez également faire sur cette branche.
+Par exemple, pour ajouter des fichiers à la zone de transfert, utilisez:
+$ git add nom_de_fichier
+Et pour faire un commit, utilisez:
+git commit -m "Message de validation"
+Dans un instant, vous allez faire un commit sur la branche "escrime". Le diagramme [ * Voir le schéma : git branching.jpg * ] montre ce qu'il adviendra du projet Git.
+
+1. Affichez les logs de Git.
+Notez la sortie :
+    Les commits que vous voyez ont tous été faits dans la branche principale ("master"). La branche "escrime" en a héritée. Cela signifie que chaque commit que la branche "master" possède, sera aussi possédé par la branche "escrime".
+Remarque: si vous trouvez que votre curseur est bloqué dans le log Git, appuyez sur q pour quitter.
+
+2. Dans cv.txt, remplacez votre habileté à élaborer des plans contre le capitaine Crochet avec votre expérience dans les combats à l'épée.
+Supprimer cette ligne :
+- Élaborer des plans contre le capitaine Crochet
+et tapez cette ligne à sa place:
+- Engager des combats d'épée avec les pirates
+
+3. Ajoutez "cv.txt" dans la zone de transfert :
+$ git add cv.txt
+
+4. Validez les modifications dans le dépôt avec un message de validation.
+$ git commit -m "Expériences professionnelles de PETER PAN"
+
+/\/\/\/\GIT MERGE/\/\/\/\
+Et si vous vouliez inclure toutes les modifications apportées à la branche "escrime" sur la branche principale ? Nous pouvons facilement accomplir ceci en fusionnant la branche "escrime" avec la branche master :
+$ git merge nom_de_branche
+Dans un instant, vous fusionnerez les branches. Garder en tête :
+    Votre objectif est de mettre à jour le master avec les modifications que vous avez apportées dans "escrime".
+    "escrime" est la branche donnante, car elle fournit les changements.
+    "master" est la branche de réception, puisqu'elle accepte ces changements.
+	
+1. Vous êtes actuellement sur la branche "escrime". Passez à la branche principale.
+$ git checkout master
+
+2. Votre expérience de combat à l'épée est si impressionnante qu'elle appartient à la version master de votre CV.
+Depuis le terminal, fusionnez la branche "escrime" dans la branche principale.
+$ git merge escrime
+Notez la sortie : La fusion est une "avance rapide" car Git reconnaît que la branche "escrime" contient le plus récent commit. Git avance rapidement la branche "master" pour être à jour avec "escrime".
+
+/\/\/\/\CONFLIT DE FUSION I/\/\/\/\
+La fusion a été réussie parce que le master n'avait pas changé depuis que nous avions fait un commit sur "escrime". Git savait simplement mettre à jour le master avec les changements sur "escrime".
+Que se passerait-il si vous faisiez un commit sur master avant de fusionner les deux branches ?
+De plus, que se passe-t-il si le commit que vous avez fait sur le master a modifié le même texte que vous avez travaillé dans "escrime" ?
+Lorsque vous revenez à master et demandez à Git de fusionner les deux branches, Git ne sait pas quels changements vous voulez garder. C'est ce qu'on appelle un conflit de fusion.
+
+1. Vous êtes sur la branche master. Dans l'éditeur de code, où vous avez écrit:
+- Engager des combats d'épée avec les pirates
+Ajoutez le mot "professionnel", ainsi le texte se présente comme suit:
+- Engager des combats d'épée avec les pirates professionnels
+
+2. Ajoutez cv.txt à la zone de transfert.
+$ git add cv.txt
+
+3. Commitez les modifications dans le dépôt avec un message.
+$ git commit -m "Modifications des expériences professionnelles de PETER PAN"
+
+4. Imaginez que quelques semaines se sont écoulées et que vous aimeriez développer davantage votre curriculum vitae d'escrime.
+Revenez sur la branche "escrime".
+$ git checkout escrime
+
+5. De la branche "escrime", changez la ligne pour qu'elle se lise comme suit:
+- Engager des combats d'épée avec les pirates professionnels tels que Monsieur Mouche
+
+6. De nouveau, ajoutez cv.txt à la zone de transfert.
+$ git add cv.txt
+
+7. Commitez les modifications dans le dépôt avec un message.
+$ git commit -m "Modifications2 des expériences professionnelles de PETER PAN"
+
+/\/\/\/\CONFLIT DE FUSION II/\/\/\/\
+Disons que vous décidez que vous souhaitez fusionner les modifications de la branche "escrime" et "master".
+Voici où les ennuis commencent!
+Vous avez effectué des commits sur des branches distinctes qui modifient la même ligne de manière contradictoire. Maintenant, quand vous essayez de fusionner la branche "escrime" et "master", Git ne saura pas quelle version du fichier conserver.
+
+1. Passez sur la branche principale :
+$ git checkout master
+
+2. Dans le terminal, entrez la commande ci-dessous :
+$ git merge escrime
+Cela va essayer de fusionner la branche "escrime" et "master".
+Dans la sortie, notez les lignes :
+--------------------------------------------------------------------
+CONFLICT (content): Merge conflict in cv.txt                      --
+Automatic merge failed; fix conflicts and then commit the result. --
+--------------------------------------------------------------------
+
+3. Nous devons corriger le conflit de fusion.
+Dans l'éditeur de code, regardez cv.txt. Git utilise des marquages ​​pour indiquer la version du fichier HEAD (master) et la version du fichier (escrime)
+Git nous demande quelle version de fichier conserver : la version sur "master" ou la version sur "escrime". Vous décidez que vous voulez la version sur "escrime".
+Dans l'éditeur de code:
+Supprimer le contenu de la ligne tel qu'il apparaît dans la branche principale.
+Supprimez toutes les marques spéciales de Git, y compris les mots HEAD et "escrime". Si l'une des marques de Git reste, par exemple, >>>>>>> et =======, le conflit reste.
+
+4. Ajoutez cv.txt à la zone de transfert.
+$ git add cv.txt
+
+5. Maintenant, faites un commit. Pour votre message de validation, tapez "Résolution des conflits de fusion" pour indiquer le but de la validation.
+$ git commit -m "Résolution des conflits de fusion"
+
+/\/\/\/\SUPPRIMER UNE BRANCHE/\/\/\/\
+Dans Git, les branches sont généralement un moyen de parvenir à une fin. Vous les créez pour travailler sur une nouvelle fonctionnalité du projet, mais l'objectif final est de fusionner cette fonctionnalité dans la branche principale. Une fois la branche intégrée dans le master, elle a rempli son rôle et peut être supprimée.
+
+La commande :
+$ git branch -d nom_de_branche
+supprimera la branche spécifiée de votre projet Git.
+Maintenant que master contient tous les changements de fichier qui étaient dans la branche "escrime", supprimons la.
+$ git branch -d escrime
+
+
+--------####################################### Généralisations ############################################--------
+Prenons un moment pour passer en revue les principaux concepts et commandes de la leçon avant de passer à autre chose.
+Les branches de Git permettent aux utilisateurs d'expérimenter différentes versions d'un projet en travaillant sur différentes branches.
+Les commandes suivantes sont utiles dans le flux de travail de la branche Git :
+$ git branch -- Répertorie toutes les branches d'un projet Git.
+$ git branch nouvelle_branche -- Crée une nouvelle branche.
+$ git checkout nouvelle_branche -- Utilisé pour passer d'une branche à l'autre.
+$ git merge nom_de_branche -- Utilisé pour joindre les changements de fichier d'une branche à l'autre.
+$ git branch -d nom_de_branche -- supprime la branche spécifiée.
+--------####################################### Généralisations ############################################--------
+/\/\/\/\GIT TRAVAIL EN ÉQUIPE/\/\/\/\
+Félicitations, vous en savez maintenant assez pour commencer à collaborer sur des projets Git !
+Une remote est un dépôt Git qui réside en dehors de votre dossier de projet Git. Les remotes peuvent vivre sur le Web, sur un réseau partagé ou même dans un dossier séparé sur votre ordinateur local.
+Le flux de travail collaboratif de Git est constitué des étapes qui permettent un développement de projet en douceur lorsque plusieurs collaborateurs travaillent sur le même projet Git.
+Nous pouvons également utiliser les commandes suivantes :
+$ git clone -- Crée une copie locale d'une remote.
+$ git remote -v -- Répertorie les remotes d'un projet Git.
+$ git fetch -- Cherche le travail effectué dans la remote et l'extrait dans la copie locale.
+$ git merge origin/master -- fusionne la branche origine/master dans votre branche locale.
+$ git push origin <nom_de_branche> -- Pousse une branche locale dans la remote d'origine.
+Les projets Git sont généralement gérés sur Github, un site Web qui héberge des projets Git pour des millions d'utilisateurs. Avec Github, vous pouvez accéder à vos projets de n'importe où dans le monde en utilisant le flux de travail de base que vous avez appris ici.
+--------####################################################################################################--------
